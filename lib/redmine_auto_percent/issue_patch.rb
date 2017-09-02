@@ -20,7 +20,7 @@ module RedmineAutoPercent
   #    self.done_ratio = 100 if self.status.is_closed?
 #    end
  	def update_due_date
- 	  if (!(self.done_ratio == self.status.default_fone_ratio) && self.status.is_closed?)
+ 	  if (!self.done_ratio == self.status.default_fone_ratio && self.status.is_closed?)
 		self.due_date = Date.today
 	  end
 	end
