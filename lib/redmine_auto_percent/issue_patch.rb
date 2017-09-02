@@ -6,7 +6,7 @@ module RedmineAutoPercent
       base.send(:include, InstanceMethods)
 
       base.class_eval do
- #       before_save :update_percent
+        before_save :custom_field_set_value
  		before_save :update_due_date
       end
     end
@@ -16,7 +16,7 @@ module RedmineAutoPercent
   end
 
   module InstanceMethods
-def object_custom_field_set_value
+def custom_field_set_value
   self.custom_field_values.each do |field|
     if ( ( field.custom_field.id == 2 ) && self.status.is_closed?)
       field.value = 100
