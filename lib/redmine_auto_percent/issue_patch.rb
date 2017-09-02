@@ -6,7 +6,7 @@ module RedmineAutoPercent
       base.send(:include, InstanceMethods)
 
       base.class_eval do
-        before_save :update_percent
+ #       before_save :update_percent
  		before_save :update_due_date
       end
     end
