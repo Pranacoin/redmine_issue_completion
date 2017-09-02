@@ -16,9 +16,9 @@ module RedmineAutoPercent
   end
 
   module InstanceMethods
-    def update_percent
-      self.done_ratio = 100 if self.status.is_closed?
-    end
+//    def update_percent
+  //    self.done_ratio = 100 if self.status.is_closed?
+//    end
  	def update_due_date
  	  if (self.due_date.nil? and self.status.is_closed?)
 		self.due_date = Date.today
