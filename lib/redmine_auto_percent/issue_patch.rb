@@ -26,7 +26,6 @@ end
  	def update_due_date
  	  if (!(self.done_ratio == self.status.default_done_ratio) && self.status.is_closed?)
 		self.due_date = Date.today
-		  self.custom_field_id(2).value = 500
 	  end
 	end
   end
