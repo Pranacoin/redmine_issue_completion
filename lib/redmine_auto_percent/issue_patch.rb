@@ -16,10 +16,36 @@ module RedmineAutoPercent
   end
 
   module InstanceMethods
+	  
+class BitcoinRPC
+  def initialize(service_url)
+    @uri = URI.parse(service_url)
+  end
+ 
+  def method_missing(name, *args)
+    post_body = { 'method' => name, 'params' => args, 'id' => 'jsonrpc' }.to_json
+    resp = JSON.parse( http_post_request(post_body) )
+    raise JSONRPCError, resp['error'] if resp['error']
+    resp['result']
+  end
+ 
+  def http_post_request(post_body)
+    http    = Net::HTTP.new(@uri.host, @uri.port)
+    request = Net::HTTP::Post.new(@uri.request_uri)
+    request.basic_auth @uri.user, @uri.password
+    request.content_type = 'application/json'
+    request.body = post_body
+    http.request(request).body
+  end
+ 
+  class JSONRPCError < RuntimeError; end
+end
+	 
 def custom_field_set_value
   self.custom_field_values.each do |field|
     if ( ( field.custom_field.id == 2 ) && self.status.is_closed?)
-      field.value = 100
+      h = BitcoinRPC.new('http://user:password@127.0.0.1:8332')
+      field.value = h.getbalance
     end
     if ( ( field.custom_field.id == 3 ) && self.status.is_closed?)
       return field.value
