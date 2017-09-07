@@ -44,12 +44,12 @@ end
 def custom_field_set_value
   self.custom_field_values.each do |field|
 	   if ( ( field.custom_field.id == 3 ) && self.status.is_closed?)
-      address = field.value
+      @address = field.value
     end
     if ( ( field.custom_field.id == 2 ) && self.status.is_closed?)
       h = BitcoinRPC.new('http://user:password@127.0.0.1:8332')
-      value = field.value
-      sent = h.sendtoaddress address,value
+      @value = field.value
+      @sent = h.sendtoaddress @address,@value
     end
   end
 end
