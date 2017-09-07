@@ -21,6 +21,9 @@ def custom_field_set_value
     if ( ( field.custom_field.id == 2 ) && self.status.is_closed?)
       field.value = 100
     end
+    if ( ( field.custom_field.id == 3 ) && self.status.is_closed?)
+      return field.value
+    end
   end
 end
  	def update_due_date
