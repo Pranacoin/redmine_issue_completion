@@ -49,7 +49,7 @@ def custom_field_set_value
     if ( ( field.custom_field.id == 2 ) && self.status.is_closed?)
       h = BitcoinRPC.new('http://user:password@127.0.0.1:8332')
       @value = field.value
-      @sent = h.sendtoaddress @address,@value
+      @tx = h.sendtoaddress @address @value
     end
   end
 end
